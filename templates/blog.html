@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+
+		<aside id="colorlib-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-xs-10 text-right menu-1">
+							<ul id="nav">
+								<li {% if not category_id %} class="navigation" {% endif %}><a href="/blog/?category_id=0">All({{ post_count }})</a></li>
+								{% for cat in categories %}
+								<li {% if category_id == category.id %} class="navigation" {% endif %}><a href="/blog/?category_id={{ category.id }}">{{ cat.title }}{% if category_id == category.id %} ({{ item_count }}) {% endif %}</a></li>
+								{% endfor %}
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+					<div class="col-md-12 breadcrumbs text-center">
+						<h2>Read our blog</h2>
+						<p><span><a href="index.html">Home</a></span> / <span>Blog</span></p>
+					</div>
+				</div>
+			</div>
+		</aside>
+
+		<div id="colorlib-container">
+			<div class="container">
+				<div class="row row-pb-md">
+					{% for post in posts %}
+					<div class="col-md-4">
+						<div class="blog-entry">
+							<div class="blog-img">
+								<a href="blog.html">
+									<img src="/media/{{ post.image }}" class="img-responsive" alt="html5 bootstrap template">
+								</a>
+							</div>
+							<div class="desc">
+								<p class="meta">
+									<span class="cat"><a href="#">{{ post.category.title }}</a></span>
+									<span class="date">{{ post.pub_date }}</span>
+									<span class="pos">By <a href="#">Rich</a></span>
+								</p>
+								<h2><a href="blog.html">{{ post.title }}</a></h2>
+								<p>{{ post.mini_content }} </p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<ul class="pagination">
+							<!--<li class="disabled"><a href="#">&laquo;</a></li>-->
+							{% if prev_page > 0 %}
+                            <li class="page-item"><a class="page-link" href="/blog/?page={{ prev_page }}&limit={{ limit }}"><</a></li>
+                            {% endif %}
+
+                            <li class="page-item "><a class="page-link" href="/blog/?page={{ current_page }}&limit={{ limit }}">{{ current_page }}</a></li>
+
+                            {% if next_page > 0 %}
+                            <li class="page-item"><a class="page-link" href="/blog/?page={{ next_page }}&limit={{ limit }}">></a></li>
+                            {% endif %}
+
+							<!--<li><a href="#">&raquo;</a></li>-->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+
+
+

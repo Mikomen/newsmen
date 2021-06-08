@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+		<aside id="colorlib-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 breadcrumbs text-center">
+						<h2>About Me</h2>
+						<p><span><a href="index.html">Home</a></span> / <span>About</span></p>
+					</div>
+				</div>
+			</div>
+		</aside>
+
+		<div id="colorlib-container">
+			<div class="container">
+				<div class="row">
+					{% for inf in info %}
+					<div class="col-md-6">
+						<img class="img-responsive" src="/media/{{inf.image}}" alt="">
+					</div>
+					{% endfor %}
+					{% for inf in info %}
+					<div class="col-md-6">
+						<p><h1>{{inf.owner}}</h1></p>
+						<blockquote>
+							{{inf.achivment}}
+						</blockquote>
+						<p class="first-letra">
+								<strong>{{inf.owner}}</strong> <a href="{{inf.link}}">{{inf.link}}</a> {{inf.text}}
+						<p>
+							<ul class="colorlib-social-icons">
+								<li><a target="_blank" href="https://twitter.com/MirakhmatK"><i class="icon-twitter"></i></a></li>
+								<li><a target="_blank" href="https://www.facebook.com/mirakhmat.khavazkhanov"><i class="icon-facebook"></i></a></li>
+								<li><a target="_blank" href="https://www.instagram.com/khanov_2900"><i class="icon-instagram"></i></a></li>
+								<li><a target="_blank" href="https://vk.com/mikokhanov"><i class="icon-vk"></i></a></li>
+							</ul>
+						</p>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+

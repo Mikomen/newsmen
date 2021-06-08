@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+		<aside id="colorlib-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 breadcrumbs text-center">
+						<h2>Travel</h2>
+						<p><span><a href="/home/">Home</a></span> / <span>Travel</span></p>
+					</div>
+				</div>
+			</div>
+		</aside>
+
+		<div id="colorlib-container">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<div class="row row-pb-md">
+							{% for post in posts %}
+							<div class="col-md-6">
+								<div class="blog-entry">
+									<div class="blog-img">
+										<a href="blog.html"><img src="/media/{{ post.image }}" class="img-responsive" alt="html5 bootstrap template"></a>
+									</div>
+									<div class="desc">
+										<p class="meta">
+											{% for category in categories %}
+												<span class="cat"><a href="#">{{ category.title }}</a></span>
+											{% endfor %}
+											<p><span class="date">{{ post.pub_date }}</span></p>
+
+										</p>
+										<h2><a href="blog.html">{{ post.title }}</a></h2>
+										<p>{{ post.mini_content }} </p>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+
+
+
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<ul class="pagination">
+									{% if prev_page > 0 %}
+									<li class="page-item"><a class="page-link" href="/blog/?page={{ prev_page }}&limit={{ limit }}"><</a></li>
+									{% endif %}
+
+									<li class="page-item "><a class="page-link" href="/blog/?page={{ current_page }}&limit={{ limit }}">{{ current_page }}</a></li>
+
+									{% if next_page > 0 %}
+									<li class="page-item"><a class="page-link" href="/blog/?page={{ next_page }}&limit={{ limit }}">></a></li>
+									{% endif %}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
