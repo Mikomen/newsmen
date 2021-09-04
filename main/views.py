@@ -185,6 +185,7 @@ def contactHandler(request):
     return render(request, 'contact.html', {'contact':contact})
 
 
+def justF(): pass
 
 
 
