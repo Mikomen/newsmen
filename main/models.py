@@ -34,8 +34,8 @@ class CommentItem(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     comment = models.CharField(max_length=500)
     author = models.CharField(max_length=50)
-    rating = models.IntegerField()
-    status = models.IntegerField()
+    rating = models.IntegerField(default=0)
+    status = models.IntegerField(default=1)
 
     def __str__(self):
         return self.author

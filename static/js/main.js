@@ -1,5 +1,5 @@
 ;(function () {
-	
+
 	'use strict';
 
 	var isMobile = {
@@ -33,10 +33,10 @@
 
     			$('body').removeClass('offcanvas');
     			$('.js-colorlib-nav-toggle').removeClass('active');
-				
+
 	    	}
-	    
-	    	
+
+
 	    }
 		});
 
@@ -53,21 +53,19 @@ $("#request").submit(function() {
 	        'email': $('#request').find('[name="email"]').val(),
 	        'title': $('#request').find('[name="title"]').val(),
 	        'message': $('#request').find('[name="message"]').val()
+	        //'csrfmiddlewaretoken':csrfmiddlewaretoken
 
 
 	    };
 
-	    //oData = $('#request').serialize();
-
 	    $.ajax({
             type: 'POST',
             url: 'contact/',
-            dataType: 'html',
+            dataType: 'json',
             data: oData,
             success:function(){
                 alert("Успешно отправлено");
-//                $('#request input').val('')
-//                $('#request textarea').val('')
+
             }
 	    })
 
@@ -97,14 +95,14 @@ $("#request").submit(function() {
 			$this
 				.addClass('active')
 				.find('ul')
-				.slideDown(500, 'easeOutExpo');				
+				.slideDown(500, 'easeOutExpo');
 		}).mouseleave(function(){
 
 			var $this = $(this);
 			$this
 				.removeClass('active')
 				.find('ul')
-				.slideUp(500, 'easeOutExpo');				
+				.slideUp(500, 'easeOutExpo');
 		});
 
 
@@ -114,7 +112,7 @@ $("#request").submit(function() {
 
     			$('body').removeClass('offcanvas');
     			$('.js-colorlib-nav-toggle').removeClass('active');
-				
+
 	    	}
 		});
 	};
@@ -135,14 +133,14 @@ $("#request").submit(function() {
 
 		});
 	};
-	
+
 
 	var contentWayPoint = function() {
 		var i = 0;
 		$('.animate-box').waypoint( function( direction ) {
 
 			if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
-				
+
 				i++;
 
 				$(this.element).addClass('item-animate');
@@ -165,9 +163,9 @@ $("#request").submit(function() {
 							el.removeClass('item-animate');
 						},  k * 200, 'easeInOutExpo' );
 					});
-					
+
 				}, 100);
-				
+
 			}
 
 		} , { offset: '85%' } );
@@ -199,13 +197,13 @@ $("#request").submit(function() {
 	var goToTop = function() {
 
 		$('.js-gotop').on('click', function(event){
-			
+
 			event.preventDefault();
 
 			$('html, body').animate({
 				scrollTop: $('html').offset().top
 			}, 500, 'easeInOutExpo');
-			
+
 			return false;
 		});
 
@@ -219,7 +217,7 @@ $("#request").submit(function() {
 			}
 
 		});
-	
+
 	};
 
 
@@ -230,7 +228,7 @@ $("#request").submit(function() {
 
 
 	var sliderMain = function() {
-		
+
 	  	$('#colorlib-hero .flexslider').flexslider({
 			animation: "fade",
 			slideshowSpeed: 5000,
@@ -272,7 +270,7 @@ $("#request").submit(function() {
 	};
 
 
-	
+
 	$(function(){
 		mobileMenuOutsideClick();
 		offcanvasMenu();

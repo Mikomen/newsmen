@@ -35,5 +35,8 @@ urlpatterns = [
     path('single/', singleHandler),
     path('travel/', travelHandler),
     path('contact/', contactHandler),
+    path('blog/<int:post_id>', singleHandler),
+    path('<int:post_id>', singleHandler),
+    path('event/<int:post_id>', singleHandler),
     path('', homeHandler),
 ]

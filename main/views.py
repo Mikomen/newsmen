@@ -13,7 +13,7 @@ def aboutHandler(request):
 
 
 
-def blogHandler(request):
+def blogHandler(request ):
     galleries = Post.objects.all().order_by('-rating')[:8]
     recent_posts = Post.objects.all().order_by('-rating')[:3]
     categories = Category.objects.filter()
@@ -46,6 +46,12 @@ def blogHandler(request):
                                          'post_count':post_count,
                                          'item_count':item_count
                                          })
+
+
+def postItemHandler(request, post_id):
+    post = Post.objects.get(id=int(post_id))
+
+    return render(request, 'single.html', {'post':post})
 
 def contactHandler(request):
     galleries = Post.objects.all().order_by('-rating')[:8]
@@ -96,10 +102,36 @@ def homeHandler(request):
     return render(request, 'home.html', {'posts':posts, 'categories':categories, 'head_post':head_post, 'galleries':galleries,
                                          'recent_posts':recent_posts})
 
-def singleHandler(request):
+def singleHandler(request, post_id):
     galleries = Post.objects.all().order_by('-rating')[:8]
     recent_posts = Post.objects.all().order_by('-rating')[:3]
-    return render(request, 'single.html', {'galleries':galleries, 'recent_posts':recent_posts})
+    post = Post.objects.get(id=int(post_id))
+    comment_items = CommentItem.objects.filter(post__id=post_id)
+
+    s = 0
+
+    for i in comment_items:
+        s = s + 1
+    a = s + 1
+    print(s, a)
+    print("*"*100)
+
+
+    if request.POST:
+
+        c = CommentItem()
+
+        name = request.POST.get('name', '')
+        comment = request.POST.get('name', '')
+
+        c.author = name
+        c.comment = comment
+        c.save()
+
+        CommentItem.rating = a
+
+
+    return render(request, 'single.html', {'galleries':galleries, 'recent_posts':recent_posts, 'post':post, 'comment_items':comment_items})
 
 def travelHandler(request):
     posts = Post.objects.all()[:6]
@@ -131,21 +163,30 @@ def travelHandler(request):
 def contactHandler(request):
     contact = Contact.objects.all()
 
+
+    if request.POST:
+
+        r = GetInTouch()
+
+        firstname = request.POST.get('firstname', '')
+        lastname = request.POST.get('lastname', '')
+        title = request.POST.get('title', '')
+        email = request.POST.get('email', '')
+        message = request.POST.get('message', '')
+
+        r.firstname = firstname
+        r.lastname = lastname
+        r.email = email
+        r.title = title
+        r.message = message
+        r.save()
+
+
     return render(request, 'contact.html', {'contact':contact})
 
-def GetInTouch(request):
-    r = GetInTouch()
-    firstname = request.POST.get('firstname', '')
-    lastname = request.POST.get('lastname', '')
-    title = request.POST.get('title', '')
-    email = request.POST.get('email', '')
-    message = request.POST.get('message', '')
 
-    r.firstname = firstname
-    r.lastname = lastname
-    r.email = email
-    r.title = title
-    r.message = message
-    r.save()
 
-    return JsonResponse({'success': True, 'errorMsg': '', '_success': True})
+
+
+
+
